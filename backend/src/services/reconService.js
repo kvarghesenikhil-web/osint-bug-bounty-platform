@@ -1,35 +1,20 @@
-const { spawn } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 function runSubfinder(domain) {
-  return new Promise((resolve, reject) => {
-    const process = spawn("python3", [
-      "../recon-engine/subdomain/subfinder_runner.py",
-      domain,
-    ]);
+  return new Promise((resolve) => {
+    try {
+      const filePath = path.join(
+        "/home/kali/osint-bug-bounty-platform/data/latest_scan.json"
+      );
 
-    let output = "";
+      const raw = fs.readFileSync(filePath, "utf-8");
+      const parsed = JSON.parse(raw);
 
-    process.stdout.on("data", (data) => {
-      output += data.toString();
-    });
-
-    process.stderr.on("data", (err) => {
-      console.error(err.toString());
-    });
-
-    process.on("close", () => {
-  try {
-    if (!output || output.trim() === "") {
-      return resolve([]);
+      resolve(parsed);
+    } catch (err) {
+      resolve([{ error: `Failed to load saved scan: ${err.message}` }]);
     }
-
-    const parsed = JSON.parse(output);
-    resolve(parsed);
-  } catch (e) {
-    console.error("Raw output:", output);
-    reject("JSON parse failed");
-  }
-});
   });
 }
 

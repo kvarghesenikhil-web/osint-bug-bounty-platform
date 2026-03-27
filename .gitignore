@@ -1,0 +1,10 @@
+node_modules/
+frontend/node_modules/
+recon-engine/venv/
+__pycache__/
+*.pyc
+data/scans/*
+!data/scans/.gitkeep
+data/latest_scan.json
+.env
+backend/resume.cfg
