@@ -1,5 +1,11 @@
 # OSINT Bug Bounty Intelligence Platform
 
+![React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react\&logoColor=white)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?logo=node.js\&logoColor=white)
+![Python](https://img.shields.io/badge/Recon-Python-3776AB?logo=python\&logoColor=white)
+![Status](https://img.shields.io/badge/Project-Live%20MVP-success)
+![License](https://img.shields.io/badge/Use-Authorized%20Recon%20Only-critical)
+
 A live OSINT and bug bounty intelligence platform built with **React**, **Node.js**, and **Python**, designed for **authorized reconnaissance workflows** and **attack surface triage**.
 
 This project combines a Python-based recon engine with an Express backend and a React dashboard to support:
@@ -397,25 +403,116 @@ This demonstrates the platform’s ability to move from raw discovery to explain
 
 ---
 
+## Quick Demo Flow
+
+### 1. Start the backend
+
+```bash
+cd backend
+node server.js
+```
+
+### 2. Start the frontend
+
+```bash
+cd frontend
+npm run dev -- --host 0.0.0.0 --port 5173
+```
+
+### 3. Launch a deep scan
+
+```bash
+curl -X POST http://localhost:3000/api/recon/scan/deep \
+  -H "Content-Type: application/json" \
+  -d '{"domain":"hackerone.com"}'
+```
+
+### 4. Poll scan status
+
+```bash
+curl http://localhost:3000/api/recon/status/<scanId>
+```
+
+### 5. Fetch results
+
+```bash
+curl http://localhost:3000/api/recon/results/<scanId>
+```
+
+This mirrors the live frontend workflow:
+
+* enter a root domain
+* trigger a deep scan
+* wait for background processing
+* render prioritized results in the dashboard
+
+---
+
 ## Screenshots
 
-Add screenshots here after capturing the running dashboard.
+Add real screenshots after running the frontend and backend locally.
 
-Suggested screenshots:
+### Recommended screenshots to include
 
-* homepage/dashboard view
-* deep scan in progress
-* completed findings table
-* priority summary cards
+1. **Dashboard Home**
 
-Example section format:
+   * target input field
+   * scan action button
+   * summary cards
+
+2. **Scan In Progress**
+
+   * active scan ID
+   * running status
+   * progress message
+
+3. **Completed Findings Table**
+
+   * prioritized assets
+   * risk scores
+   * reasons badges
+
+4. **High-Priority Asset View**
+
+   * one strong example such as `api.hackerone.com`
+   * visible score, ports, and reasons
+
+### Suggested screenshot folder structure
+
+```text
+docs/
+└── screenshots/
+    ├── dashboard-home.png
+    ├── scan-in-progress.png
+    ├── deep-scan-results.png
+    └── high-priority-asset.png
+```
+
+### README screenshot block template
 
 ```md
 ## Screenshots
 
-![Dashboard Overview](./docs/screenshots/dashboard-overview.png)
+### Dashboard Home
+![Dashboard Home](./docs/screenshots/dashboard-home.png)
+
+### Scan In Progress
+![Scan In Progress](./docs/screenshots/scan-in-progress.png)
+
+### Deep Scan Results
 ![Deep Scan Results](./docs/screenshots/deep-scan-results.png)
+
+### High-Priority Asset Example
+![High-Priority Asset](./docs/screenshots/high-priority-asset.png)
 ```
+
+### Screenshot capture tips
+
+* use a clean target like `hackerone.com`
+* capture one screenshot during `running` state
+* capture one screenshot after `completed` state
+* keep the browser zoom at 100% for consistency
+* avoid terminal clutter in dashboard screenshots
 
 ---
 
